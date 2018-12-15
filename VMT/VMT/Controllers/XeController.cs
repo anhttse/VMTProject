@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VMT.Models;
+using VMT.Respository;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,48 +10,50 @@ namespace VMT.Controllers
     [Route("api/[controller]")]
     public class XeController : Controller
     {
+        public IXeRespository XeRespository { get; set; }
+
+        public XeController(IXeRespository repo)
+        {
+            XeRespository = repo;
+        }
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Xe> Get(string qr)
+        public async Task<IActionResult> Get(string qr)
         {
-            using (var db = new VMTContext())
-            {
-                return db.Xe.Where(x => x.BienSoXe.Contains(qr)).AsEnumerable();
-            }
+            var rs = await XeRespository.GetAll();
+            return Ok(rs);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public Xe Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            using (var db = new VMTContext())
-            {
-                return db.Xe.Find(id);
-            }
+            var rs = await XeRespository.Find(id);
+            return Ok(rs);
         }
 
         // POST api/values
         [HttpPost]
-        public string Post([FromBody]Xe xe)
+        public async Task<IActionResult> Post([FromBody]Xe xe)
         {
-            using (var db = new VMTContext())
-            {
-                db.Xe.Add(xe);
-                var rs = db.SaveChanges();
-                return rs > 0 ? "status:1" : "status:0";
-            }
+            var rs = await XeRespository.Add(xe);
+            return Ok(rs);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(int id, [FromBody]Xe xe)
         {
+            var rs = await XeRespository.Update(xe);
+            return Ok(rs);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var rs = await XeRespository.Remove(id);
+            return Ok(rs);
         }
     }
 }

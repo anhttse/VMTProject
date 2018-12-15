@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VMT.Models;
+using VMT.Respository;
 
 namespace VMT
 {
@@ -21,8 +22,9 @@ namespace VMT
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<VMTContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("VMT")));
+            services.AddSingleton<IXeRespository, XeRespository>();
+            //            services.AddDbContext<VMTContext>(options =>
+            //                options.UseSqlServer(Configuration.GetConnectionString("VMT")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

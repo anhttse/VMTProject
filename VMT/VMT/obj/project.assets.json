@@ -5827,11 +5827,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMT\\VMT\\VMT\\VMT.csproj",
+      "projectUniqueName": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMTProject\\VMT\\VMT\\VMT.csproj",
       "projectName": "VMT",
-      "projectPath": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMT\\VMT\\VMT\\VMT.csproj",
+      "projectPath": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMTProject\\VMT\\VMT\\VMT.csproj",
       "packagesPath": "C:\\Users\\AnhTT.ANHTT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMT\\VMT\\VMT\\obj\\",
+      "outputPath": "C:\\Users\\AnhTT.ANHTT\\source\\repos\\VMTProject\\VMT\\VMT\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
