@@ -14,6 +14,8 @@ namespace VMT.Models
         public string Ref { get; set; }
         public string BienSoXe { get; set; }
         public string HangXe { get; set; }
+        public decimal? TheTich { get; set; }
+        public decimal? TheTichThuc { get; set; }
         public string GhiChu { get; set; }
 
         public virtual ICollection<VanChuyen> VanChuyen { get; set; }

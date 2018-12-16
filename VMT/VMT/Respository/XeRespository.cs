@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VMT.Models;
 using VMT.Models.Response;
 
@@ -10,7 +10,7 @@ namespace VMT.Respository
 {
     public class XeRespository : IXeRespository
     {
-        private VMTContext _db;
+        private readonly VMTContext _db;
 
         public XeRespository()
         {
@@ -22,6 +22,7 @@ namespace VMT.Respository
             var rp = new Response { ResultCode = ResultCode.Error, Message = "Thêm xe không thành công" };
             try
             {
+                xe.Ref = Guid.NewGuid().ToString();
                 await _db.Xe.AddAsync(xe);
                 var rs = await _db.SaveChangesAsync();
                 if (rs <= 0) return rp;
@@ -30,31 +31,92 @@ namespace VMT.Respository
 
                 return rp;
             }
-            catch (SqlException sqlE)
+            catch (Exception e)
             {
-                Console.WriteLine(sqlE.ToString());
+                if (e.InnerException is SqlException sqlEx)
+                {
+                    if (sqlEx.Number == 2601 || sqlEx.Number == 2627)
+                    {
+                        rp.Message = $"Xe có biển số {xe.BienSoXe} đã tồn tại";
+                    }
+                }
+//                Console.WriteLine(e.ToString());
                 return rp;
             }
         }
 
-        public Task<IEnumerable<Xe>> GetAll()
+        public async Task<IEnumerable<Xe>> GetAll()
         {
-            throw new NotImplementedException();
+            var rs = await _db.Xe.ToListAsync();
+            return rs;
         }
 
-        public Task<Xe> Find(int id)
+        public async Task<Xe> Find(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Xe.FindAsync(id);
         }
 
-        public Task<Response> Update(Xe xe)
+        public async Task<Response> Update(int id, Xe xe)
         {
-            throw new NotImplementedException();
+            var rp = new Response { ResultCode = ResultCode.Error, Message = "Cập nhật xe thất bại" };
+            try
+            {
+                var obj = await _db.Xe.FindAsync(id);
+                if (obj == null) return rp;
+                obj.BienSoXe = xe.BienSoXe;
+                obj.HangXe = xe.HangXe;
+                obj.GhiChu = xe.GhiChu;
+                obj.TheTich = xe.TheTich;
+                obj.TheTichThuc = xe.TheTichThuc;
+                await _db.SaveChangesAsync();
+                rp.ResultCode = ResultCode.Success;
+                rp.Message = "Cập nhật xe thành công";
+                return rp;
+            }
+            catch (Exception e)
+            {
+                if (e is DbUpdateConcurrencyException concurrencyEx)
+                {
+                    // A custom exception of yours for concurrency issues
+//                    Console.WriteLine(concurrencyEx.StackTrace);
+                    return rp;
+                }
+
+                if (e is DbUpdateException dbUpdateEx)
+                {
+                    if (dbUpdateEx.InnerException != null && dbUpdateEx.InnerException is SqlException sqlException)
+                    {
+                        switch (sqlException.Number)
+                        {
+                            case 2627: // Unique constraint error
+                            case 547: // Constraint check violation
+                            case 2601: // Duplicated key row error
+                                // Constraint violation exception
+                                // A custom exception of yours for concurrency issues
+                                rp.Message = $"Xe có biển số {xe.BienSoXe} đã tồn tại";
+                                return rp;
+                            default:
+                                // A custom exception of yours for other DB issues
+                                rp.Message = "Hệ thống xảy ra lỗi";
+                                return rp;
+                        }
+                    }
+                }
+//                Console.WriteLine(e);
+                return rp;
+            }
         }
 
-        public Task<Response> Remove(int id)
+        public async Task<Response> Remove(int id)
         {
-            throw new NotImplementedException();
+            var rp = new Response { ResultCode = ResultCode.Error, Message = "Xóa xe thất bại" };
+            var entry = await _db.Xe.FindAsync(id);
+            _db.Xe.Remove(entry);
+            var rs = await _db.SaveChangesAsync();
+            if (rs <= 0) return rp;
+            rp.ResultCode = ResultCode.Success;
+            rp.Message = "Xóa xe thành công";
+            return rp;
         }
     }
 }

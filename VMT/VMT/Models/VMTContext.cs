@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace VMT.Models
 {
@@ -21,13 +21,11 @@ namespace VMT.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder.IsConfigured) return;
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-            var connectionString = configuration.GetConnectionString("VMT");
-            optionsBuilder.UseSqlServer(connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=VMT;Persist Security Info=True;User ID=sa;Password=123456");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -93,6 +91,10 @@ namespace VMT.Models
                 entity.Property(e => e.HangXe).HasMaxLength(250);
 
                 entity.Property(e => e.Ref).HasMaxLength(100);
+
+                entity.Property(e => e.TheTich).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.TheTichThuc).HasColumnType("decimal(18, 0)");
             });
         }
     }

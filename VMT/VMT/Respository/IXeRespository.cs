@@ -12,7 +12,7 @@ namespace VMT.Respository
         Task<Response> Add(Xe xe);
         Task<IEnumerable<Xe>> GetAll();
         Task<Xe> Find(int id);
-        Task<Response> Update(Xe xe);
+        Task<Response> Update(int id,Xe xe);
         Task<Response> Remove(int id);
     }
 }

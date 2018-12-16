@@ -18,7 +18,9 @@ namespace VMT.Controllers
         }
         // GET: api/values
         [HttpGet]
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Get(string qr)
+
         {
             var rs = await XeRespository.GetAll();
             return Ok(rs);
@@ -44,7 +46,7 @@ namespace VMT.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]Xe xe)
         {
-            var rs = await XeRespository.Update(xe);
+            var rs = await XeRespository.Update(id, xe);
             return Ok(rs);
         }
 

@@ -53,7 +53,6 @@ C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\run
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.csprojResolveAssemblyReference.cache
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.csproj.CoreCompileInputs.cache
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.RazorAssemblyInfo.cache
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.RazorAssemblyInfo.cs
@@ -62,3 +61,4 @@ C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.RazorTargetAssemblyInfo.cache
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.pdb
+C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.csprojResolveAssemblyReference.cache

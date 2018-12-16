@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using VMT.Models;
 using VMT.Respository;
 
@@ -21,8 +22,10 @@ namespace VMT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(opt=>opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            //using Dependency Injection
             services.AddSingleton<IXeRespository, XeRespository>();
+
             //            services.AddDbContext<VMTContext>(options =>
             //                options.UseSqlServer(Configuration.GetConnectionString("VMT")));
         }
