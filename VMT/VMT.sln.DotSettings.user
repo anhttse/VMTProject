@@ -2,4 +2,5 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\AnhTT.ANHTT\.nuget\packages\microsoft.aspnetcore.app\3.0.0-preview-18579-0056\ref\netcoreapp3.0\Microsoft.Extensions.Configuration.Xml.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Chuyen/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Respository/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

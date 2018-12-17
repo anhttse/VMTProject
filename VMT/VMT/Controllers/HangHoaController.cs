@@ -8,21 +8,19 @@ using VMT.Repository;
 namespace VMT.Controllers
 {
     [Route("api/[controller]")]
-    public class XeController : Controller
+    public class HangHoaController : Controller
     {
-        public IXeRepository XeRespository { get; set; }
+        public IHangHoaRepository HangHoa { get; set; }
 
-        public XeController(IXeRepository repo)
+        public HangHoaController(IHangHoaRepository repo)
         {
-            XeRespository = repo;
+            HangHoa = repo;
         }
         // GET: api/values
         [HttpGet]
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Get(string qr)
-
         {
-            var rs = await XeRespository.GetAll();
+            var rs = await HangHoa.GetAll(qr);
             return Ok(rs);
         }
 
@@ -30,23 +28,23 @@ namespace VMT.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var rs = await XeRespository.Find(id);
+            var rs = await HangHoa.Find(id);
             return Ok(rs);
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Xe xe)
+        public async Task<IActionResult> Post([FromBody]HangHoa hangHoa)
         {
-            var rs = await XeRespository.Add(xe);
+            var rs = await HangHoa.Add(hangHoa);
             return Ok(rs);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Xe xe)
+        public async Task<IActionResult> Put(int id, [FromBody]HangHoa hangHoa)
         {
-            var rs = await XeRespository.Update(id, xe);
+            var rs = await HangHoa.Update(id, hangHoa);
             return Ok(rs);
         }
 
@@ -54,7 +52,7 @@ namespace VMT.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var rs = await XeRespository.Remove(id);
+            var rs = await HangHoa.Remove(id);
             return Ok(rs);
         }
     }

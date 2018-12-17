@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using VMT.Models;
 using VMT.Models.Response;
 
-namespace VMT.Respository
+namespace VMT.Repository
 {
-    public class XeRespository : IXeRespository
+    public class XeRepository : IXeRepository
     {
         private readonly VMTContext _db;
 
-        public XeRespository()
+        public XeRepository(VMTContext context)
         {
-            _db = new VMTContext();
+            _db = context;
         }
 
         public async Task<Response> Add(Xe xe)
@@ -40,7 +40,7 @@ namespace VMT.Respository
                         rp.Message = $"Xe có biển số {xe.BienSoXe} đã tồn tại";
                     }
                 }
-//                Console.WriteLine(e.ToString());
+                //                Console.WriteLine(e.ToString());
                 return rp;
             }
         }
@@ -78,7 +78,7 @@ namespace VMT.Respository
                 if (e is DbUpdateConcurrencyException concurrencyEx)
                 {
                     // A custom exception of yours for concurrency issues
-//                    Console.WriteLine(concurrencyEx.StackTrace);
+                    //                    Console.WriteLine(concurrencyEx.StackTrace);
                     return rp;
                 }
 
@@ -102,7 +102,7 @@ namespace VMT.Respository
                         }
                     }
                 }
-//                Console.WriteLine(e);
+                //                Console.WriteLine(e);
                 return rp;
             }
         }

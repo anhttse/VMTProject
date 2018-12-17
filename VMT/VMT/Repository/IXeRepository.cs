@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMT.Models;
 using VMT.Models.Response;
 
-namespace VMT.Respository
+namespace VMT.Repository
 {
-    public interface IXeRespository
+    public interface IXeRepository
     {
         Task<Response> Add(Xe xe);
         Task<IEnumerable<Xe>> GetAll();
