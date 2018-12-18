@@ -8,8 +8,8 @@ namespace VMT.Repository.Authentications
 {
     public interface IAuthRepository
     {
-        Task<string> Register(RegisterModel user);
-        Task<string> Update(RegisterModel user);
-
+        Task<object> Register(RegisterModel user);
+        Task<object> Login(LoginModel user);
+        Task<object> Update(RegisterModel user);
     }
 }

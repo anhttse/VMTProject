@@ -36,6 +36,7 @@ C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\VMT
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\VMT.runtimeconfig.dev.json
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\VMT.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\VMT.pdb
+C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
@@ -61,5 +62,3 @@ C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.RazorTargetAssemblyInfo.cache
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.dll
 C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.pdb
-C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\obj\Debug\netcoreapp3.0\VMT.csprojResolveAssemblyReference.cache
-C:\Users\AnhTT.ANHTT\source\repos\VMTProject\VMT\VMT\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

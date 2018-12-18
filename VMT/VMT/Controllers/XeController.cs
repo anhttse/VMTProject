@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VMT.Models;
 using VMT.Repository;
@@ -7,6 +8,7 @@ using VMT.Repository;
 
 namespace VMT.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class XeController : Controller
     {
@@ -18,9 +20,7 @@ namespace VMT.Controllers
         }
         // GET: api/values
         [HttpGet]
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Get(string qr)
-
         {
             var rs = await XeRespository.GetAll();
             return Ok(rs);

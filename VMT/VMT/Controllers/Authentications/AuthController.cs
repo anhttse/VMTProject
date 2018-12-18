@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VMT.Models.Authentications;
+using VMT.Repository.Authentications;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,18 +11,24 @@ namespace VMT.Controllers.Authentications
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IAuthRepository _auth;
+
+        public AuthController(IAuthRepository auth)
         {
-            return new string[] { "value1", "value2" };
+            _auth = auth;
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]RegisterModel reg)
+        {
+            var rs = await _auth.Register(reg);
+            return Ok(rs);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody]LoginModel login)
         {
-            return "value";
+            var rs = await _auth.Login(login);
+            return Ok(rs);
         }
 
         // POST api/values
