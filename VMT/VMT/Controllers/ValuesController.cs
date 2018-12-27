@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using VMT.Identity.Authorize;
+
 
 namespace VMT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Permission(GroupName = "Admin,Sales")]
     public class ValuesController : ControllerBase
     {
         // GET api/values
         [HttpGet]
+        [Permission(GroupAction = "Read")]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };

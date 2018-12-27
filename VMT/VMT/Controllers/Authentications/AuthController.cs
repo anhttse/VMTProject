@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VMT.Models.Authentications;
 using VMT.Repository.Authentications;
@@ -17,13 +18,14 @@ namespace VMT.Controllers.Authentications
         {
             _auth = auth;
         }
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegisterModel reg)
         {
             var rs = await _auth.Register(reg);
             return Ok(rs);
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginModel login)
         {

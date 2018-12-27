@@ -19,30 +19,6 @@ namespace VMT.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -129,6 +105,77 @@ namespace VMT.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VMT.Identity.Permission", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permission");
+                });
+
+            modelBuilder.Entity("VMT.Identity.PermissionAction", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PermissionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("PermissionAction");
+                });
+
+            modelBuilder.Entity("VMT.Identity.RoleGrouPermission", b =>
+                {
+                    b.Property<string>("RoleGroupId");
+
+                    b.Property<string>("PermissionId");
+
+                    b.HasKey("RoleGroupId", "PermissionId");
+
+                    b.HasAlternateKey("PermissionId", "RoleGroupId");
+
+                    b.ToTable("RoleGrouPermission");
+                });
+
+            modelBuilder.Entity("VMT.Identity.RoleGroup", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
             modelBuilder.Entity("VMT.Identity.User", b =>
                 {
                     b.Property<string>("Id")
@@ -143,6 +190,8 @@ namespace VMT.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FullName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -182,7 +231,7 @@ namespace VMT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("VMT.Identity.RoleGroup")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -206,7 +255,7 @@ namespace VMT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("VMT.Identity.RoleGroup")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -222,6 +271,26 @@ namespace VMT.Migrations
                     b.HasOne("VMT.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VMT.Identity.PermissionAction", b =>
+                {
+                    b.HasOne("VMT.Identity.Permission", "Permission")
+                        .WithMany("PermissionAction")
+                        .HasForeignKey("PermissionId");
+                });
+
+            modelBuilder.Entity("VMT.Identity.RoleGrouPermission", b =>
+                {
+                    b.HasOne("VMT.Identity.Permission", "Permission")
+                        .WithMany("RoleGrouPermission")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VMT.Identity.RoleGroup", "RoleGroup")
+                        .WithMany("RoleGrouPermission")
+                        .HasForeignKey("RoleGroupId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

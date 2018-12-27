@@ -10,6 +10,7 @@ namespace VMT.Identity
     {
         public Permission()
         {
+            Id = Guid.NewGuid().ToString();
         }
         public Permission(string id, string name, string description)
         {
@@ -24,7 +25,7 @@ namespace VMT.Identity
         public string Name { get; set; }
         [MaxLength(250)]
         public string Description { get; set; }
-        public virtual RoleGroup RoleGroup { get; set; }
-        public virtual ICollection<GroupAction> GroupAction { get; set; }
+        public virtual ICollection<RoleGrouPermission> RoleGrouPermission { get; set; }
+        public virtual ICollection<PermissionAction> PermissionAction { get; set; }
     }
 }
